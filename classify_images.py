@@ -65,12 +65,15 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-
+    # looping through the dictionery elements
     for i in results_dic:
+      # folder path can end with / or not so we will check it and add it when necessary and remove the 
       if images_dir[-1] =="/":
         classify = classifier(images_dir+i, model).strip()
       else:
         classify = classifier(images_dir+"/"+i, model).strip()
+      # add the classifier label but format it to be lower 
       results_dic[i].append(classify.lower())
+      # add 1 if the actual label matches the classifier label else add 0 
       results_dic[i].append(1 if results_dic[i][0] in results_dic[i][1] else 0)
 
