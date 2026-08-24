@@ -66,18 +66,25 @@ def adjust_results4_isadog(results_dic, dogfile):
                maltese) (string - indicates text file's filename)
     Returns:
            None - results_dic is mutable data type so no return needed.
-    """      
+    """ 
+    #create a set for it's uniqueness to collect dogs names
     dog_names = set()
+    # pass through the file specified for dog names 
     with open(dogfile) as f:
+      # iterating through the lines of the file
       for x in f:  
+        # formating the lines of the file to be all small letters and without white spaces icluding \n
         tmp = x.lower().rstrip()
+        # there is no point in adding duplicates to a set so it will ignore them anyway but a warning is included  
         if tmp in dog_names:
           print("warning there is duplicates")
           continue
         dog_names.add(tmp)
       #print(dog_names)
 
-
+    # looping through the elements and checking if the dog name is in the dog_names set 
+    # notice we used set because checking a value makes complexity O(1)
+    
     for i in results_dic:
       actual,callsified = 0,0
       if results_dic[i][0] in dog_names:
